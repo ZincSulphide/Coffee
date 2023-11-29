@@ -1,0 +1,5 @@
+wishlist --> favorites
+turn seller --> ??
+product --> items
+sell product --> add item to menu (5:17:40)
+
