@@ -15,8 +15,8 @@ const orderSchema = mongoose.Schema({
     },
     address: {
         type: String,
-        required: true,
-    },
+        required: false,
+    },//TODO: find a way to order in the cafe or we need to make it solely for delivery
     userId: {
         required: true,
         type: String,

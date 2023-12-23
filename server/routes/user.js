@@ -86,11 +86,31 @@ userRouter.post('/api/order', auth, async(req, res) => {
 
         for (let i = 0; i < cart.length; i++) {
             let item = await Item.findById(cart[i].item._id);
-            if (item.quantity >= cart[i].quantity) {
-                item.quantity -= cart[i].quantity;
-            }
+            // if (item.quantity >= cart[i].quantity) {
+            //     item.quantity -= cart[i].quantity;
+            //*subtract ordered items from available.
+            //*ei case e applicable na but need to smhow find a way to cut it from inventory 
+            items.push({item, quantity:cart[i.quantity]});
+            await item.save();
+            // } else {
+            //     return res.status(400).json({msg: `${item.name} cannot be ordered now! `});
+            // }//*if required ingredients are not in inventory
+            //TODO: find a way to apply inventory to this part.   
         }
-        res.json(user);
+        let user = await User.findById(req.user);
+        user.cart = [];
+        user = await user.save();
+
+        let order = new Order ({
+            items,
+            totalPrice,
+            address,
+            userId : req.user,
+            orderedAt: new Date().getTime(),
+        });
+        order = await order.save();
+
+        res.json(order);
     } catch (error) {
         res.status(500).json({error: error.message});
     }

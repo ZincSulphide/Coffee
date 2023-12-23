@@ -38,7 +38,7 @@ class _AddressScreenState extends State<AddressScreen> {
   //         status: PaymentItemStatus.final_price),
   //   );
   //   super.initState();
-  // }
+  // }//!since pay isnt working paymentItems is not required
 
   @override
   void dispose() {
@@ -49,14 +49,14 @@ class _AddressScreenState extends State<AddressScreen> {
     _cityController.dispose();
   }
 
-  void onGooglePayResult(res) {
-    if (Provider.of<UserProvider>(context).user.address.isEmpty) {
-      
-    }
-  }
-  void payPressed(String addressFromRpovider) {
+  // void onGooglePayResult(res) {
+  //   if (Provider.of<UserProvider>(context).user.address.isEmpty) {
+
+  //   }
+  // }//!google pay stuff isnt working
+
+  void payPressed(String addressFromProvider) {
     addressToBeUsed = "";
-    
 
     bool isForm = _flatBuildingController.text.isNotEmpty ||
         _areaController.text.isNotEmpty ||
@@ -69,13 +69,16 @@ class _AddressScreenState extends State<AddressScreen> {
       } else {
         throw Exception('Please Enter All the Values');
       }
-    } else if (addressFromRpovider.isNotEmpty) {
-        addressToBeUsed = addressFromRpovider;
+    } else if (addressFromProvider.isNotEmpty) {
+      addressToBeUsed = addressFromProvider;
     } else {
       showSnackBar(context, 'ERROR');
     }
-    addressServices.saveUserAddress(context: context, address: addressToBeUsed);
-    
+    addressServices.saveUserAddress(
+      context: context,
+      address: addressToBeUsed,
+    );
+    addressServices.placeOrder(context: context, address: addressToBeUsed, totalSum: double.parse(widget.totalAmount));
   }
 
   @override
@@ -173,7 +176,7 @@ class _AddressScreenState extends State<AddressScreen> {
                 height: 10,
               ),
 
-              CustomButton(text: 'Pay Now!', onTap:() => payPressed(address)),
+              CustomButton(text: 'Pay Now!', onTap: () => payPressed(address)),
 
               // GooglePayButton(
               //   onPressed: () => payPressed(address),

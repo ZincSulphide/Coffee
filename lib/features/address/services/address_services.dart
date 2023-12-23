@@ -46,39 +46,41 @@ class AddressServices {
   }
 
   //get all items
-  Future<List<Item>> fetchAllItems(BuildContext context) async {
+  void placeOrder(
+      {required BuildContext context,
+      required String address,
+      required double totalSum}) async {
     final userProvider = Provider.of<UserProvider>(
       context,
       listen: false,
     );
-    List<Item> itemList = [];
+
     try {
-      http.Response res =
-          await http.get(Uri.parse('$uri/admin/get-items'), headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-        'x-auth-token': userProvider.user.token,
-      });
+      http.Response res = await http.post(Uri.parse('$uri/api/order'),
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+            'x-auth-token': userProvider.user.token,
+          },
+          body: jsonEncode({
+            'cart': userProvider.user.cart,
+            'address': address,
+            'totalPrice': totalSum,
+          }));
 
       httpErrorHandle(
         response: res,
         context: context,
         onSuccess: () {
-          for (int i = 0; i < jsonDecode(res.body).length; i++) {
-            itemList.add(
-              Item.fromJson(
-                jsonEncode(
-                  jsonDecode(res.body)[i],
-                ),
-              ),
-            );
-          }
+          showSnackBar(context, "Your order has been placed!");
+          User user = userProvider.user.copyWith(
+            cart: [],
+          );
+          userProvider.setUserFromModel(user);
         },
       );
     } catch (e) {
       showSnackBar(context, e.toString());
     }
-
-    return itemList;
   }
 
   void deleteItem({
