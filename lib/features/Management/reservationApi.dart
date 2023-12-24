@@ -5,8 +5,8 @@ import 'package:coffee/constants/global_variables.dart';
 import 'dart:convert';
 
 class reservationApi {
-  static addReservation(String username, DateTime date, int slot, int table,
-      int numberOfPeople) async {
+  static addReservation(
+      String username, DateTime date, int slot, int table) async {
     var url = Uri.parse("${uri}/api/reservation/add");
     try {
       final response = await http.post(url, headers: <String, String>{
@@ -16,7 +16,6 @@ class reservationApi {
         "Date": date,
         "slot": slot,
         "table": table,
-        "numberOfPeople": numberOfPeople,
       });
       allReservations.add(Reservation.fromJson(json.decode(response.body)));
     } catch (e) {

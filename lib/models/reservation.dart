@@ -6,7 +6,6 @@ class Reservation {
   final DateTime date;
   final int slot;
   final int table;
-  final int numberOfPeople;
 
   Reservation({
     required this.id,
@@ -14,7 +13,6 @@ class Reservation {
     required this.date,
     required this.slot,
     required this.table,
-    required this.numberOfPeople,
   });
 
   Map<String, dynamic> toMap() {
@@ -24,7 +22,6 @@ class Reservation {
       'date': date.toIso8601String(),
       'slot': slot,
       'table': table,
-      'numberOfPeople': numberOfPeople,
     };
   }
 
@@ -35,7 +32,6 @@ class Reservation {
       date: DateTime.parse(map['date']),
       slot: map['slot'] ?? 0,
       table: map['table'] ?? 0,
-      numberOfPeople: map['numberOfPeople'] ?? 0,
     );
   }
 

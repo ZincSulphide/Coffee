@@ -21,11 +21,6 @@ const reservationSchema = mongoose.Schema({
         required: true,
         trim: true,
     },
-    numberOfPeople: {
-        type: Number,
-        required: true,
-        trim: true,
-    },
 });
 
 const reservation = mongoose.model("reservation", reservationSchema);
