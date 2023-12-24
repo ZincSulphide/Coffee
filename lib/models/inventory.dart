@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:coffee/features/inventoryManagement/inventoryApi.dart';
+import 'package:coffee/features/Management/inventoryApi.dart';
 
 class Inventory {
   final String id;
