@@ -7,8 +7,9 @@ const mongoose = require('mongoose');
 const adminRouter = require('./routes/admin');
 const authRouter = require('./routes/auth');
 const itemRouter = require('./routes/item');
-const userRouter = require('./routes/user')
-
+const userRouter = require('./routes/user');
+const reservationRouter = require('./routes/reservation');
+const inventoryRouter = require('./routes/inventory');
 //initializations
 const PORT = 3000;
 const app = express();
@@ -20,6 +21,8 @@ app.use(authRouter);
 app.use(adminRouter);
 app.use(itemRouter);
 app.use(userRouter);
+app.use(reservationRouter);
+app.use(inventoryRouter);
 
 //connections
 mongoose.connect(DB).then(() => {

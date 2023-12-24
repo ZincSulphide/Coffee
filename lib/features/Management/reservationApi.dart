@@ -9,15 +9,16 @@ class reservationApi {
       String username, DateTime date, int slot, int table) async {
     var url = Uri.parse("${uri}/api/reservation/add");
     try {
-      final response = await http.post(url, headers: <String, String>{
-        'Content-Type': 'application/json'
-      }, body: {
-        "username": username,
-        "Date": date,
-        "slot": slot,
-        "table": table,
-      });
-      allReservations.add(Reservation.fromJson(json.decode(response.body)));
+      final response = await http.post(url,
+          headers: <String, String>{'Content-Type': 'application/json'},
+          body: jsonEncode({
+            "username": username,
+            "Date": date.toIso8601String(),
+            "slot": slot,
+            "table": table
+          }));
+      print('bababa');
+      allReservations.add(Reservation.fromMap(json.decode(response.body)));
     } catch (e) {
       print("Error: $e");
     }

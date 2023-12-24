@@ -12,8 +12,8 @@ class ReservationScreen extends StatefulWidget {
 
 class _ReservationScreenState extends State<ReservationScreen> {
   List<String> selectedSlots = [];
-  late DateTime selectedDate;
-  late int selectedTable;
+  DateTime? selectedDate;
+  int? selectedTable;
 
   List<String> predefinedSlots = [
     '10:00 - 11:00',
@@ -177,8 +177,19 @@ class _ReservationScreenState extends State<ReservationScreen> {
                   print('Selected Date: $selectedDate');
                   print('Selected Table: $selectedTable');
                   print('Selected Slots: $selectedSlots');
-                  // reservationApi.addReservation(user.name, selectedDate,
-                  // selectedSlots, selectedTable, numberOfPeople);
+
+                  for (int i = 0; i < selectedSlots.length; i++) {
+                    reservationApi.addReservation(
+                        user.name,
+                        selectedDate!,
+                        predefinedSlots.indexOf(selectedSlots[i]),
+                        selectedTable!);
+
+                    print(user.name);
+                    print(selectedDate);
+                    print(predefinedSlots.indexOf(selectedSlots[i]));
+                    print(selectedTable);
+                  }
                 },
                 child: Text('Confirm Selection'),
               ),
