@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
-String uri = 'http://192.168.56.1:3000';
+// String uri = 'http://192.168.56.1:3000';
+String uri = 'http://192.168.0.105:3000';
+
 class GlobalVariables {
   // COLORS
   static const appBarGradient = LinearGradient(
     colors: [
       Color.fromARGB(255, 150, 118, 91),
       Color.fromARGB(255, 189, 154, 111),
-      
     ],
     stops: [0.5, 1.0],
   );
@@ -47,6 +48,4 @@ class GlobalVariables {
     'assets/images/carousel-3.png',
     'assets/images/carousel-4.png',
   ];
-
-  
 }
