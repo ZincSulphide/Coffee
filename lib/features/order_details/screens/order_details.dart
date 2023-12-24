@@ -1,26 +1,24 @@
 import 'package:coffee/constants/global_variables.dart';
-import 'package:coffee/features/home/widgets/address_box.dart';
-import 'package:coffee/features/home/widgets/carousel_image.dart';
-import 'package:coffee/features/home/widgets/offer_of_the_day.dart';
-import 'package:coffee/features/home/widgets/top_categories.dart';
 import 'package:coffee/features/search/screen/search_screen.dart';
+import 'package:coffee/models/order.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatefulWidget {
-  static const String routeName = '/home';
-  const HomeScreen({super.key});
+class OrderDetailScreen extends StatefulWidget {
+  static const routeName = "/order-details";
+  final Order order;
+
+  const OrderDetailScreen({super.key, required this.order});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<OrderDetailScreen> createState() => _OrderDetailScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _OrderDetailScreenState extends State<OrderDetailScreen> {
   void navigateToSearchScreen(String query) {
     Navigator.pushNamed(
       context,
       SearchScreen.routeName,
       arguments: query,
-      
     );
   }
 
@@ -30,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
         child: AppBar(
+          iconTheme: const IconThemeData(color: Colors.white),
           flexibleSpace: Container(
             decoration: const BoxDecoration(
               gradient: GlobalVariables.appBarGradient,
@@ -92,19 +91,31 @@ class _HomeScreenState extends State<HomeScreen> {
           ]),
         ),
       ),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Column(
           children: [
-            AddressBox(),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            TopCategories(),
-            SizedBox(
-              height: 10,
+            const Text(
+              "View Order Details",
+              style: const TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.w500,
+              ),
             ),
-            CarouselImage(),
-            OfferOfDay(),
+            Container(
+              // decoration: BoxDecoration(
+              //   border: Border.all(
+              //     color: Colors.black12,
+              //   ),
+              // ),
+              child: Column(
+                children: [
+                  Text("Order date: ${widget.order.orderedAt}"),
+                ],
+              ),
+            )
           ],
         ),
       ),

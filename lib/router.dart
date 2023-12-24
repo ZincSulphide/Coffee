@@ -5,8 +5,10 @@ import 'package:coffee/features/auth/screens/auth_screen.dart';
 import 'package:coffee/features/home/screens/category_deals_screen.dart';
 import 'package:coffee/features/home/screens/home_screen.dart';
 import 'package:coffee/features/item_details/screens/item_detail_screen.dart';
+import 'package:coffee/features/order_details/screens/order_details.dart';
 import 'package:coffee/features/search/screen/search_screen.dart';
 import 'package:coffee/models/item.dart';
+import 'package:coffee/models/order.dart';
 import 'package:flutter/material.dart';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
@@ -60,6 +62,12 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => AddressScreen(totalAmount: totalAmount,),
+      );
+      case OrderDetailScreen.routeName:
+      var order = routeSettings.arguments as Order;
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => OrderDetailScreen(order: order,),
       );
     default:
       return MaterialPageRoute(
