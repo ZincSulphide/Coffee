@@ -74,10 +74,13 @@ class _AddressScreenState extends State<AddressScreen> {
     } else {
       showSnackBar(context, 'ERROR');
     }
-    addressServices.saveUserAddress(
-      context: context,
-      address: addressToBeUsed,
-    );
+    if (Provider.of<UserProvider>(context, listen: false)
+        .user
+        .address
+        .isEmpty) {
+      addressServices.saveUserAddress(
+          context: context, address: addressToBeUsed);
+    }
     addressServices.placeOrder(
       context: context,
       address: addressToBeUsed,
