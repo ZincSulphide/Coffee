@@ -78,7 +78,11 @@ class _AddressScreenState extends State<AddressScreen> {
       context: context,
       address: addressToBeUsed,
     );
-    addressServices.placeOrder(context: context, address: addressToBeUsed, totalSum: double.parse(widget.totalAmount));
+    addressServices.placeOrder(
+      context: context,
+      address: addressToBeUsed,
+      totalSum: double.parse(widget.totalAmount),
+    );
   }
 
   @override

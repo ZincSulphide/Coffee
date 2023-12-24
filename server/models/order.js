@@ -1,4 +1,5 @@
 const mongoose = require ('mongoose');
+const {itemSchema} = require('./item');
 const orderSchema = mongoose.Schema({
     items: [
         {

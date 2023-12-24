@@ -14,8 +14,8 @@ class _OrdersState extends State<Orders> {
   //temp lst
   List<String> list = [
     
-      'assets/images/orderImage1.png',
-      'assets/images/orderImage2.jpg',
+      'https://images.app.goo.gl/n1z1bSsNKhcE73cn8',
+      'https://images.app.goo.gl/n1z1bSsNKhcE73cn8',
   ];
 
   @override

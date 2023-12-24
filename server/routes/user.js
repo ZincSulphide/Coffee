@@ -1,6 +1,7 @@
 const express = require("express");
 const userRouter = express.Router();
 const auth = require('../middleware/auth');
+const Order = require('../models/order');
 const { Item } = require('../models/item');
 const User = require('../models/user')
 
@@ -69,12 +70,12 @@ userRouter.delete('/api/remove-from-cart/:id', auth, async (req, res) => {
 userRouter.post('/api/save-user-address', auth, async(req, res) => {
     try {
         const { address } = req.body;
-        let user = await user.findById(req.user);
+        let user = await User.findById(req.user);
         user.address = address;
         user = await user.save();
         res.json(user);
     } catch (error) {
-        res.status(500).json({error: e.message});
+        res.status(500).json({error: error.message});
     }
 });
 
@@ -90,7 +91,7 @@ userRouter.post('/api/order', auth, async(req, res) => {
             //     item.quantity -= cart[i].quantity;
             //*subtract ordered items from available.
             //*ei case e applicable na but need to smhow find a way to cut it from inventory 
-            items.push({item, quantity:cart[i.quantity]});
+            items.push({item, quantity:cart[i].quantity});
             await item.save();
             // } else {
             //     return res.status(400).json({msg: `${item.name} cannot be ordered now! `});
