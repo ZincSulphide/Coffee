@@ -5,18 +5,18 @@ class GlobalVariables {
   // COLORS
   static const appBarGradient = LinearGradient(
     colors: [
-      Color.fromARGB(255, 150, 118, 91),
-      Color.fromARGB(255, 189, 154, 111),
+      Color.fromARGB(255, 115, 81, 53),
+      Color.fromARGB(255, 165, 126, 78),
       
     ],
     stops: [0.5, 1.0],
   );
 
-  static const secondaryColor = Color(0xff89664e);
+  static const secondaryColor = Color.fromARGB(255, 115, 81, 53);
   static const backgroundColor = Color(0xfffefefe);
   static const Color greyBackgroundCOlor = Color(0xffffffec);
   static var selectedNavBarColor = const Color(0xff38220f);
-  static const unselectedNavBarColor = Color(0xff89664e);
+  static const unselectedNavBarColor = Color.fromARGB(255, 122, 91, 70);
   static const starColor = Color.fromRGBO(255, 153, 0, 1);
 
   static const List<Map<String, String>> categoryImages = [

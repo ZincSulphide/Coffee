@@ -28,7 +28,7 @@ const orderSchema = mongoose.Schema({
     },
     status: {
         type: Number,
-        default: 0,//0 = pending/placed, 1 = completed, 3 = delivered
+        default: 0,//0 = pending/placed, 1 = processing(cooking), 2 = delivered/received
     }
 });
 
