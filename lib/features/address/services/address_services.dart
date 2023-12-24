@@ -45,6 +45,7 @@ class AddressServices {
     }
   }
 
+  //get all items
   void placeOrder(
       {required BuildContext context,
       required String address,
@@ -82,7 +83,6 @@ class AddressServices {
     }
   }
 
-  //deleting items from admin panel
   void deleteItem({
     required BuildContext context,
     required Item item,

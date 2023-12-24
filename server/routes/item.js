@@ -1,7 +1,7 @@
 const express = require("express");
 const itemRouter = express.Router();
 const auth = require("../middleware/auth");
-const {Item} = require("../models/item");
+const {Item} = require("../models/item")
 
 //api/items?category=Essentials
 itemRouter.get('/api/items/', auth, async(req, res) => {

@@ -3,6 +3,8 @@ import 'package:coffee/features/home/widgets/address_box.dart';
 import 'package:coffee/features/home/widgets/carousel_image.dart';
 import 'package:coffee/features/home/widgets/offer_of_the_day.dart';
 import 'package:coffee/features/home/widgets/top_categories.dart';
+import 'package:coffee/features/reservation/adminReservationScreen.dart';
+import 'package:coffee/features/reservation/reservationScreen.dart';
 import 'package:coffee/features/search/screen/search_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +22,6 @@ class _HomeScreenState extends State<HomeScreen> {
       context,
       SearchScreen.routeName,
       arguments: query,
-      
     );
   }
 
@@ -53,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             padding: EdgeInsets.only(left: 6),
                             child: Icon(
                               Icons.search,
-                              color: Colors.black12,
+                              color: Colors.black,
                               size: 23,
                             ),
                           ),
@@ -92,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ]),
         ),
       ),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Column(
           children: [
             AddressBox(),
@@ -100,6 +101,18 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 10,
             ),
             TopCategories(),
+            ElevatedButton(
+              onPressed: () {
+                // Add condition for Customer/Admin ReservationScreen
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ReservationScreen()),
+                  // MaterialPageRoute(
+                  // builder: (context) => AdminReservationScreen()),
+                );
+              },
+              child: Text('Place Reservation'),
+            ),
             SizedBox(
               height: 10,
             ),
