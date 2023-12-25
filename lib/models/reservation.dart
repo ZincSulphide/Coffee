@@ -27,9 +27,10 @@ class Reservation {
 
   factory Reservation.fromMap(Map<String, dynamic> map) {
     return Reservation(
-      id: map['id'] ?? '',
+      id: map['_id'] ?? '',
       username: map['username'] ?? '',
-      date: DateTime.parse(map['date']),
+      // date: DateTime.parse(map['date']),
+      date: map['date'] != null ? DateTime.parse(map['date']) : DateTime.now(),
       slot: map['slot'] ?? 0,
       table: map['table'] ?? 0,
     );

@@ -14,11 +14,14 @@ class reservationApi {
           body: jsonEncode({
             "username": username,
             "Date": date.toIso8601String(),
-            "slot": slot,
-            "table": table
+            "slot": slot.toString(),
+            "table": table.toString()
           }));
-      print('bababa');
-      allReservations.add(Reservation.fromMap(json.decode(response.body)));
+      var temp = json.decode(response.body);
+      print(temp);
+      var ret = Reservation.fromMap(temp);
+      print(ret.id);
+      allReservations.add(ret);
     } catch (e) {
       print("Error: $e");
     }
