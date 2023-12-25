@@ -29,9 +29,12 @@ class Inventory {
 
   factory Inventory.fromMap(Map<String, dynamic> map) {
     return Inventory(
-      id: map['id'] ?? '',
+      id: map['_id'] ?? '',
       name: map['name'] ?? '',
-      entryDate: DateTime.parse(map['entryDate']),
+      // entryDate: DateTime.parse(map['entryDate']),
+      entryDate: map['entryDate'] != null
+          ? DateTime.parse(map['entryDate'])
+          : DateTime.now(),
       expirationTimerDays: map['expirationTimerDays'] ?? 1,
       amount: map['amount']?.toDouble() ?? 0.0,
     );
