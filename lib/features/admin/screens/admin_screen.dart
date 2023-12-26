@@ -29,39 +29,36 @@ class _AdminScreenState extends State<AdminScreen> {
       _page = page;
     });
   }
+
   @override
   Widget build(BuildContext context) {
-    
-    return  Scaffold(
-      appBar: PreferredSize( 
-        preferredSize:  const Size.fromHeight(60),
-        child: AppBar( 
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(60),
+        child: AppBar(
           flexibleSpace: Container(
             decoration: const BoxDecoration(
               gradient: GlobalVariables.appBarGradient,
             ),
           ),
-          title: Row( 
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children:[
+          title:
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Container(
               alignment: Alignment.topLeft,
               child: Image.asset(
-                'assets/images/coffee-cup.png', 
-                width: 50, 
+                'assets/images/coffee-cup.png',
+                width: 50,
                 height: 45,
               ),
             ),
-            const Text('Admin',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold
-            ),)      
-          ]
-          ),
+            const Text(
+              'Admin',
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
+          ]),
         ),
- 
-    ),
+      ),
       body: pages[_page],
       //posts
       bottomNavigationBar: BottomNavigationBar(
@@ -73,60 +70,51 @@ class _AdminScreenState extends State<AdminScreen> {
         onTap: updatePage,
         items: [
           BottomNavigationBarItem(
-            icon: Container(
-              width: bottomBarWidth,
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(
-                    color: _page == 0? 
-                    GlobalVariables.selectedNavBarColor : 
-                    GlobalVariables.backgroundColor,
-                    width: bottomBarBorderWidth,
-                  )
-                )
+              icon: Container(
+                width: bottomBarWidth,
+                decoration: BoxDecoration(
+                    border: Border(
+                        top: BorderSide(
+                  color: _page == 0
+                      ? GlobalVariables.selectedNavBarColor
+                      : GlobalVariables.backgroundColor,
+                  width: bottomBarBorderWidth,
+                ))),
+                child: const Icon(Icons.home_outlined),
               ),
-              child: const Icon(Icons.home_outlined),
-            ),
-            label: ''
-          ),
+              label: ''),
           //analytics
           BottomNavigationBarItem(
-            icon: Container(
-              width: bottomBarWidth,
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(
-                    color: _page == 1? 
-                    GlobalVariables.selectedNavBarColor : 
-                    GlobalVariables.backgroundColor,
-                    width: bottomBarBorderWidth,
-                  )
-                )
+              icon: Container(
+                width: bottomBarWidth,
+                decoration: BoxDecoration(
+                    border: Border(
+                        top: BorderSide(
+                  color: _page == 1
+                      ? GlobalVariables.selectedNavBarColor
+                      : GlobalVariables.backgroundColor,
+                  width: bottomBarBorderWidth,
+                ))),
+                child: const Icon(Icons.analytics_outlined),
               ),
-              child: const Icon(Icons.analytics_outlined),
-            ),
-            label: ''
-          ),
+              label: ''),
           //orders
           BottomNavigationBarItem(
-            icon: Container(
-              width: bottomBarWidth,
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(
-                    color: _page == 2? 
-                    GlobalVariables.selectedNavBarColor : 
-                    GlobalVariables.backgroundColor,
-                    width: bottomBarBorderWidth,
-                  )
-                )
+              icon: Container(
+                width: bottomBarWidth,
+                decoration: BoxDecoration(
+                    border: Border(
+                        top: BorderSide(
+                  color: _page == 2
+                      ? GlobalVariables.selectedNavBarColor
+                      : GlobalVariables.backgroundColor,
+                  width: bottomBarBorderWidth,
+                ))),
+                child: const Icon(Icons.all_inbox_outlined),
               ),
-              child: const Icon(Icons.all_inbox_outlined),
-            ),
-            label: ''
-          ), 
+              label: ''),
         ],
-       ),
+      ),
     );
   }
 }

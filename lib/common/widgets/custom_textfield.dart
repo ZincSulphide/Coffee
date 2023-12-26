@@ -7,20 +7,20 @@ class CustomTextField extends StatelessWidget {
   final bool obscureText;
 
   const CustomTextField({
-    super.key, 
+    super.key,
     required this.controller,
-    required this.hintText, 
-    this.maxLines = 1, 
+    required this.hintText,
+    this.maxLines = 1,
     this.obscureText = false,
-    }); 
+  });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-
+      obscureText: obscureText,
       decoration: InputDecoration(
-        hintText: hintText,
+          hintText: hintText,
           border: const OutlineInputBorder(
               borderSide: BorderSide(
             color: Colors.black38,
@@ -30,12 +30,11 @@ class CustomTextField extends StatelessWidget {
             color: Colors.black38,
           ))),
       validator: (val) {
-        if(val == null || val.isEmpty){
+        if (val == null || val.isEmpty) {
           return 'Enter your $hintText';
-
         }
         return null;
-      }, 
+      },
       maxLines: maxLines,
     );
   }
