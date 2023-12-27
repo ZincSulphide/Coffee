@@ -70,29 +70,34 @@ adminRouter.post('/admin/change-order-status', admin, async(req, res) => {
 adminRouter.get('/admin/analytics', admin, async(req, res) => {
     try {
         const orders = await Order.find({});
-        let totalEarnings = 0;
+        let totalEarnings = 0.0;
         for (let i = 0; i < orders.length; i++) {
             for (let j = 0 ; j < orders[i].items.length; j++) {
-                totalEarnings += orders[i].items[j].quantity * orders[i].items[j].price;
+                totalEarnings += orders[i].items[j].quantity * orders[i].items[j].item.price;
+                // console.log( orders[i].items[j].quantity +" " +  orders[i].items[j].itemprice);
             }
+        
         }
+        console.log("Looped " + totalEarnings);
         //fetch category wise orders
-        let coffeeEarnings = await fetchCategoryWiseItem('Coffee');
-        let teaEarnings = await fetchCategoryWiseItem('Tea');
-        let sandwichesEarnings = await fetchCategoryWiseItem('Sandwiches');
-        let dessertsEarning = await fetchCategoryWiseItem('Desserts');
-        let breakfastEarning = await fetchCategoryWiseItem('Breakfast');
+        let coffeeEarnings = await fetchCategoryWiseItem("Coffee");
+        let teaEarnings = await fetchCategoryWiseItem("Tea");
+        let sandwichesEarnings = await fetchCategoryWiseItem("Sandwiches");
+        let dessertsEarnings = await fetchCategoryWiseItem("Desserts");
+        let breakfastEarnings = await fetchCategoryWiseItem("Breakfast");
 
         let earnings = {
             totalEarnings,
             coffeeEarnings,
             teaEarnings,
             sandwichesEarnings,
-            dessertsEarning,
-            breakfastEarning,            
+            dessertsEarnings,
+            breakfastEarnings,            
         };
 
+
         res.json(earnings);
+        console.log(earnings);
         
     } catch (error) {
         res.status(500).json({error: error.message});
@@ -100,14 +105,14 @@ adminRouter.get('/admin/analytics', admin, async(req, res) => {
 })
 
 async function fetchCategoryWiseItem(category) {
-    let earnings = 0;
+    let earnings = 0.0;
     let categoryOrders = await Order.find({
         'items.item.category': category,
-    })
+    });
     for (let i = 0; i < categoryOrders.length; i++) {
         for (let j = 0 ; j < categoryOrders[i].items.length; j++) {
             earnings += 
-            categoryOrders[i].items[j].quantity * categoryOrders[i].items[j].price;
+            categoryOrders[i].items[j].quantity * categoryOrders[i].items[j].item.price;
         }
     }
     return earnings;

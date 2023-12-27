@@ -11,8 +11,6 @@ class GlobalVariables {
       Color.fromARGB(255, 115, 81, 53),
       Color.fromARGB(255, 165, 126, 78),
       
-      Color.fromARGB(255, 150, 118, 91),
-      Color.fromARGB(255, 189, 154, 111),
     ],
     stops: [0.5, 1.0],
   );

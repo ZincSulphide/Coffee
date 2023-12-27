@@ -199,15 +199,18 @@ class AdminServices {
   }
 
   Future<Map<String, dynamic>> getEarnings(BuildContext context) async {
+    
     final userProvider = Provider.of<UserProvider>(context, listen: false,);
     List<Sales> sales = [];
-    int totalEarning = 0;
+    double totalEarning = 0.0;
+    // print ("Hello ashche");
     try {
       http.Response res =
           await http.get(Uri.parse('$uri/admin/analytics'), headers: {
         'Content-Type': 'application/json; charset=UTF-8',
         'x-auth-token': userProvider.user.token,
       });
+      // print ("Tried");
 
       httpErrorHandle(
         response: res,
@@ -215,20 +218,33 @@ class AdminServices {
         onSuccess: () {
           var response = jsonDecode(res.body);
           totalEarning = response['totalEarnings'];
+          // if (response['totalEarnings'] != null) {
+          //   totalEarning = response['totalEarnings'];          
+          // }
+          // print ("if..");
+          print("upore");
+          print(response);
+          print("niche");
+          // print (Sales('Coffee', response['coffeeEarnings'] ?? 0.0));
           sales = [
-            Sales('Coffee', response['coffeeEarnings']),
-            Sales('Tea', response['teaEarnings']),
-            Sales('Sandwiches', response['sandwichesEarnings']),
-            Sales('Desserts', response['dessertsEarnings']),
-            Sales('Breakfast', response['breakfastEarnings']),
+            Sales('Coffee', response['coffeeEarnings'].toDouble() ?? 0.0),
+            Sales('Tea', response['teaEarnings'].toDouble() ?? 0.0),
+            Sales('Sandwiches', response['sandwichesEarnings'].toDouble() ?? 0.0),
+            Sales('Desserts', response['dessertsEarnings'].toDouble() ?? 0.0),
+            Sales('Breakfast', response['breakfastEarnings'].toDouble() ?? 0.0),
             
           ];
+          // print(sales);
+          
 
         },
       );
+      // print ("Error handled");
     } catch (e) {
       showSnackBar(context, e.toString());
     }
+    print(totalEarning);
+    // print("Coffee " + sales['coffeeEarnings']);
 
     return {
       'sales': sales,

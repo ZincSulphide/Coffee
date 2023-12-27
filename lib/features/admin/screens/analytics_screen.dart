@@ -1,6 +1,10 @@
+import 'package:charts_flutter_maintained/charts_flutter_maintained.dart'
+    as charts;
+// import 'package:charts_flutter_maintained/charts_flutter_maintained.dart';
 import 'package:coffee/common/widgets/loader.dart';
 import 'package:coffee/features/admin/models/sales.dart';
 import 'package:coffee/features/admin/services/admin_services.dart';
+import 'package:coffee/features/admin/widgets/category_items_chart.dart';
 import 'package:flutter/material.dart';
 
 class AnalyticsScreen extends StatefulWidget {
@@ -12,7 +16,7 @@ class AnalyticsScreen extends StatefulWidget {
 
 class _AnalyticsScreenState extends State<AnalyticsScreen> {
   final AdminServices adminServices = AdminServices();
-  int? totalSales;
+  double? totalSales;
   List<Sales>? earnings;
   @override
   void initState() {
@@ -39,7 +43,20 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
-              )
+              ),
+              SizedBox(
+                height: 250,
+                child: CategoryItemsChart(
+                  seriesList: [
+                    charts.Series(
+                      id: 'Sales',
+                      data: earnings!,
+                      domainFn: (Sales sales, _) => sales.label,
+                      measureFn: (Sales sales, _) => sales.earning,
+                    )
+                  ],
+                ),
+              ),
             ],
           );
   }
