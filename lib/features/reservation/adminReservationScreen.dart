@@ -1,12 +1,30 @@
+import 'package:coffee/features/Management/reservationApi.dart';
+import 'package:coffee/models/reservation.dart';
 import 'package:flutter/material.dart';
 
-class Reservation {
+List<String> predefinedSlots = [
+  '10:00 - 11:00',
+  '11:00 - 12:00',
+  '12:00 - 13:00',
+  '13:00 - 14:00',
+  '14:00 - 15:00',
+  '15:00 - 16:00',
+  '16:00 - 17:00',
+  '17:00 - 18:00',
+  '18:00 - 19:00',
+  '19:00 - 20:00',
+  '20:00 - 21:00',
+  '21:00 - 22:00',
+  // Adjust or add more predefined slots as needed
+];
+
+class ReservationClass {
   final DateTime date;
   final String slot;
   final int tableNumber;
   final String userName;
 
-  Reservation({
+  ReservationClass({
     required this.date,
     required this.slot,
     required this.tableNumber,
@@ -26,40 +44,46 @@ class AdminReservationScreen extends StatefulWidget {
 }
 
 class _AdminReservationScreenState extends State<AdminReservationScreen> {
-// Create a DateTime object with only the date part
-  DateTime selectedDate = getCurrentDateWithoutTime(DateTime.now());
-  DateTime currentDate = getCurrentDateWithoutTime(DateTime.now());
-  List<Reservation> reservations = [
-    Reservation(
+  List<ReservationClass> reservations = [];
+  @override
+  void initState() {
+    // TODO: implement initState
+    reservationApi.getAllReservation();
+    for (int i = 0; i < allReservations.length; i++) {
+      reservations.add(ReservationClass(
+          date: getCurrentDateWithoutTime(allReservations[i].date),
+          slot: predefinedSlots[allReservations[i].slot],
+          tableNumber: allReservations[i].table,
+          userName: allReservations[i].username));
+      print(allReservations[i].date); //check
+    }
+    reservations.add(ReservationClass(
         date: getCurrentDateWithoutTime(DateTime.now()),
         slot: '10:00 - 11:00',
         tableNumber: 1,
-        userName: 'User A'),
-    Reservation(
-        date: getCurrentDateWithoutTime(DateTime.now()),
-        slot: '12:00 - 13:00',
-        tableNumber: 2,
-        userName: 'User B'),
-    Reservation(
-        date: DateTime.now().add(Duration(days: 1)),
-        slot: '14:00 - 15:00',
-        tableNumber: 3,
-        userName: 'User C'),
-    Reservation(
-        date: DateTime.now(),
-        slot: '16:00 - 17:00',
-        tableNumber: 4,
-        userName: 'User D'),
-    // Add more demo data as needed
-  ];
+        userName: 'User A'));
 
-  List<Reservation> getReservationsForDate(DateTime date) {
+    reservations.add(
+      ReservationClass(
+          date: getCurrentDateWithoutTime(DateTime.now()),
+          slot: '12:00 - 13:00',
+          tableNumber: 2,
+          userName: 'User B'),
+    );
+    super.initState();
+  }
+
+// Create a DateTime object with only the date part
+  DateTime currentDate = getCurrentDateWithoutTime(DateTime.now());
+  DateTime selectedDate = DateTime.now();
+
+  List<ReservationClass> getReservationsForDate(DateTime date) {
     return reservations.where((res) => res.date == date).toList();
   }
 
   @override
   Widget build(BuildContext context) {
-    List<Reservation> selectedReservations =
+    List<ReservationClass> selectedReservations =
         getReservationsForDate(selectedDate);
 
     return Scaffold(
@@ -119,8 +143,9 @@ class _AdminReservationScreenState extends State<AdminReservationScreen> {
     );
     if (picked != null && picked != selectedDate) {
       setState(() {
-        selectedDate = picked;
+        selectedDate = getCurrentDateWithoutTime(picked);
       });
+      print(selectedDate);
     }
   }
 }

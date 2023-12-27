@@ -3,6 +3,7 @@ import 'package:coffee/features/home/widgets/address_box.dart';
 import 'package:coffee/features/home/widgets/carousel_image.dart';
 import 'package:coffee/features/home/widgets/offer_of_the_day.dart';
 import 'package:coffee/features/home/widgets/top_categories.dart';
+import 'package:coffee/features/inventory/showInventoryScreen.dart';
 import 'package:coffee/features/reservation/adminReservationScreen.dart';
 import 'package:coffee/features/reservation/reservationScreen.dart';
 import 'package:coffee/features/search/screen/search_screen.dart';
@@ -106,12 +107,24 @@ class _HomeScreenState extends State<HomeScreen> {
                 // Add condition for Customer/Admin ReservationScreen
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ReservationScreen()),
-                  // MaterialPageRoute(
-                  // builder: (context) => AdminReservationScreen()),
+                  // MaterialPageRoute(builder: (context) => ReservationScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => AdminReservationScreen()),
                 );
               },
               child: Text('Place Reservation'),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => InventoryPage()),
+                );
+              },
+              child: Text('Inventory(for admin)'),
             ),
             SizedBox(
               height: 10,
