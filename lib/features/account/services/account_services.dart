@@ -53,13 +53,13 @@ class AccountServices {
       SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
       await sharedPreferences.setString('x-auth-token', '');
-    } catch (e) {
-      showSnackBar(context, e.toString());
       Navigator.pushNamedAndRemoveUntil(
         context,
         AuthScreen.routeName,
         (route) => false,
       );
+    } catch (e) {
+      showSnackBar(context, e.toString());
     }
   }
 }

@@ -4,6 +4,7 @@ import 'package:coffee/constants/global_variables.dart';
 import 'package:coffee/features/admin/screens/analytics_screen.dart';
 import 'package:coffee/features/admin/screens/orders_screen.dart';
 import 'package:coffee/features/admin/screens/posts_screen.dart';
+import 'package:coffee/features/reservation/adminReservationScreen.dart';
 import 'package:flutter/material.dart';
 
 class AdminScreen extends StatefulWidget {
@@ -22,6 +23,7 @@ class _AdminScreenState extends State<AdminScreen> {
     const PostsScreen(),
     const AnalyticsScreen(),
     const OrdersScreen(),
+    AdminReservationScreen(),
   ];
 
   void updatePage(int page) {
@@ -106,6 +108,22 @@ class _AdminScreenState extends State<AdminScreen> {
                     border: Border(
                         top: BorderSide(
                   color: _page == 2
+                      ? GlobalVariables.selectedNavBarColor
+                      : GlobalVariables.backgroundColor,
+                  width: bottomBarBorderWidth,
+                ))),
+                child: const Icon(Icons.all_inbox_outlined),
+              ),
+              label: ''),
+
+          // added at 30-th dec
+          BottomNavigationBarItem(
+              icon: Container(
+                width: bottomBarWidth,
+                decoration: BoxDecoration(
+                    border: Border(
+                        top: BorderSide(
+                  color: _page == 3
                       ? GlobalVariables.selectedNavBarColor
                       : GlobalVariables.backgroundColor,
                   width: bottomBarBorderWidth,

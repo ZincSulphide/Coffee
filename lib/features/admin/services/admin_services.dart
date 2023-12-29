@@ -4,9 +4,11 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:coffee/constants/error_handling.dart';
 import 'package:coffee/features/admin/models/sales.dart';
+import 'package:coffee/features/auth/screens/auth_screen.dart';
 import 'package:coffee/models/order.dart';
 import 'package:coffee/providers/user_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../constants/global_variables.dart';
 import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:coffee/constants/utils.dart';
@@ -254,5 +256,20 @@ class AdminServices {
       'sales': sales,
       'totalEarnings': totalEarning,
     };
+  }
+
+  void logOut(BuildContext context) async {
+    try {
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      await sharedPreferences.setString('x-auth-token', '');
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        AuthScreen.routeName,
+        (route) => false,
+      );
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
   }
 }

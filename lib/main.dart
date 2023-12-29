@@ -9,27 +9,23 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 // import 'package:flutter/src/';
 
-
 void main() {
-  runApp(MultiProvider(providers:[
+  runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (context) => UserProvider()),
-  ],
-    child: const MyApp()
-  )
-  );
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp(
-      {super.key});
+  const MyApp({super.key});
   @override
-  State<MyApp>createState() => _MyAppState();
+  State<MyApp> createState() => _MyAppState();
 }
- class _MyAppState extends State<MyApp>{
+
+class _MyAppState extends State<MyApp> {
   final AuthService authService = AuthService();
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     authService.getUserData(context);
   }
@@ -37,28 +33,24 @@ class MyApp extends StatefulWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Coffee Shop',
-      theme: ThemeData(
-        scaffoldBackgroundColor: GlobalVariables.backgroundColor,
-        colorScheme: const ColorScheme.light(
-          primary: GlobalVariables.secondaryColor,
+        debugShowCheckedModeBanner: false,
+        title: 'Coffee Shop',
+        theme: ThemeData(
+          scaffoldBackgroundColor: GlobalVariables.backgroundColor,
+          colorScheme: const ColorScheme.light(
+            primary: GlobalVariables.secondaryColor,
+          ),
+          appBarTheme: const AppBarTheme(
+              elevation: 0,
+              iconTheme: IconThemeData(
+                color: Colors.black,
+              )),
         ),
-        appBarTheme: const AppBarTheme(
-            elevation: 0,
-            iconTheme: IconThemeData(
-              color: Colors.black,
-            )
-        ),
-      ),
-      onGenerateRoute: (settings) => generateRoute(settings),
-      home: Provider.of<UserProvider>(context).
-      user.token.isNotEmpty ? 
-       Provider.of<UserProvider>(context).user.type == 'user'?
-      const BottomBar() : const AdminScreen() : const AuthScreen()
-    );
+        onGenerateRoute: (settings) => generateRoute(settings),
+        home: Provider.of<UserProvider>(context).user.token.isNotEmpty
+            ? Provider.of<UserProvider>(context).user.type == 'user'
+                ? const BottomBar()
+                : const AdminScreen()
+            : const AuthScreen());
   }
- }
-
-  
-
+}

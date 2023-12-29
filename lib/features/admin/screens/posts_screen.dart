@@ -29,11 +29,14 @@ class _PostsScreenState extends State<PostsScreen> {
   }
 
   void deleteItem(Item item, int index) {
-    adminServices.deleteItem(context: context, item: item, onSuccess: () {
-      items!.removeAt(index);
-      setState(() {});
-    });
-  } 
+    adminServices.deleteItem(
+        context: context,
+        item: item,
+        onSuccess: () {
+          items!.removeAt(index);
+          setState(() {});
+        });
+  }
 
   void navigateToAddItem() {
     Navigator.pushNamed(context, AddItemScreen.routeName);
@@ -41,9 +44,13 @@ class _PostsScreenState extends State<PostsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return (items == null )
+    return (items == null)
         ? const Loader()
-        : Scaffold(
+        :
+        // ElevatedButton(
+        //     onPressed: () => adminServices.logOut(context),
+        //     child: Text('Logout')),
+        Scaffold(
             body: GridView.builder(
               itemCount: items!.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
