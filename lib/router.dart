@@ -5,8 +5,10 @@ import 'package:coffee/features/auth/screens/auth_screen.dart';
 import 'package:coffee/features/home/screens/category_deals_screen.dart';
 import 'package:coffee/features/home/screens/home_screen.dart';
 import 'package:coffee/features/item_details/screens/item_detail_screen.dart';
+import 'package:coffee/features/order_details/screens/order_details.dart';
 import 'package:coffee/features/search/screen/search_screen.dart';
 import 'package:coffee/models/item.dart';
+import 'package:coffee/models/order.dart';
 import 'package:flutter/material.dart';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
@@ -16,22 +18,22 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
         settings: routeSettings,
         builder: (_) => const AuthScreen(),
       );
-      case HomeScreen.routeName:
+    case HomeScreen.routeName:
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => const HomeScreen(),
       );
-      case BottomBar.routeName:
+    case BottomBar.routeName:
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => const BottomBar(),
       );
-      case AddItemScreen.routeName:
+    case AddItemScreen.routeName:
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => const AddItemScreen(),
       );
-      case CategoryDealsScreen.routeName:
+    case CategoryDealsScreen.routeName:
       var category = routeSettings.arguments as String;
       return MaterialPageRoute(
         settings: routeSettings,
@@ -39,7 +41,7 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
           category: category,
         ),
       );
-      case SearchScreen.routeName:
+    case SearchScreen.routeName:
       var searchQuery = routeSettings.arguments as String;
       return MaterialPageRoute(
         settings: routeSettings,
@@ -47,7 +49,7 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
           searchQuery: searchQuery,
         ),
       );
-      case ItemDetailScreen.routeName:
+    case ItemDetailScreen.routeName:
       var item = routeSettings.arguments as Item;
       return MaterialPageRoute(
         settings: routeSettings,
@@ -55,11 +57,21 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
           item: item,
         ),
       );
-      case AddressScreen.routeName:
+    case AddressScreen.routeName:
       var totalAmount = routeSettings.arguments as String;
       return MaterialPageRoute(
         settings: routeSettings,
-        builder: (_) => AddressScreen(totalAmount: totalAmount,),
+        builder: (_) => AddressScreen(
+          totalAmount: totalAmount,
+        ),
+      );
+    case OrderDetailScreen.routeName:
+      var order = routeSettings.arguments as Order;
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => OrderDetailScreen(
+          order: order,
+        ),
       );
     default:
       return MaterialPageRoute(

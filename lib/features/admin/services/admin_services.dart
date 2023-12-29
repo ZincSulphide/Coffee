@@ -69,7 +69,10 @@ class AdminServices {
 
   //get all items
   Future<List<Item>> fetchAllItems(BuildContext context) async {
-    final userProvider = Provider.of<UserProvider>(context, listen: false,);
+    final userProvider = Provider.of<UserProvider>(
+      context,
+      listen: false,
+    );
     List<Item> itemList = [];
     try {
       http.Response res =
@@ -110,7 +113,6 @@ class AdminServices {
       listen: false,
     );
     try {
-      
       http.Response res = await http.post(
         Uri.parse('$uri/admin/delete-item'),
         headers: {
@@ -133,7 +135,10 @@ class AdminServices {
   }
 
   Future<List<Order>> fetchAllOrders(BuildContext context) async {
-    final userProvider = Provider.of<UserProvider>(context, listen: false,);
+    final userProvider = Provider.of<UserProvider>(
+      context,
+      listen: false,
+    );
     List<Order> orderList = [];
     try {
       http.Response res =
@@ -175,7 +180,6 @@ class AdminServices {
       listen: false,
     );
     try {
-      
       http.Response res = await http.post(
         Uri.parse('$uri/admin/change-order-status'),
         headers: {
@@ -199,8 +203,10 @@ class AdminServices {
   }
 
   Future<Map<String, dynamic>> getEarnings(BuildContext context) async {
-    
-    final userProvider = Provider.of<UserProvider>(context, listen: false,);
+    final userProvider = Provider.of<UserProvider>(
+      context,
+      listen: false,
+    );
     List<Sales> sales = [];
     double totalEarning = 0.0;
     // print ("Hello ashche");
@@ -219,7 +225,7 @@ class AdminServices {
           var response = jsonDecode(res.body);
           totalEarning = response['totalEarnings'];
           // if (response['totalEarnings'] != null) {
-          //   totalEarning = response['totalEarnings'];          
+          //   totalEarning = response['totalEarnings'];
           // }
           // print ("if..");
           print("upore");
@@ -229,14 +235,12 @@ class AdminServices {
           sales = [
             Sales('Coffee', response['coffeeEarnings'].toDouble() ?? 0.0),
             Sales('Tea', response['teaEarnings'].toDouble() ?? 0.0),
-            Sales('Sandwiches', response['sandwichesEarnings'].toDouble() ?? 0.0),
+            Sales(
+                'Sandwiches', response['sandwichesEarnings'].toDouble() ?? 0.0),
             Sales('Desserts', response['dessertsEarnings'].toDouble() ?? 0.0),
             Sales('Breakfast', response['breakfastEarnings'].toDouble() ?? 0.0),
-            
           ];
           // print(sales);
-          
-
         },
       );
       // print ("Error handled");
@@ -251,5 +255,4 @@ class AdminServices {
       'totalEarnings': totalEarning,
     };
   }
-
 }
