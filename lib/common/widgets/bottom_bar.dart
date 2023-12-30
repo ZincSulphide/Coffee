@@ -111,14 +111,14 @@ class _BottomBarState extends State<BottomBar> {
                     : GlobalVariables.backgroundColor,
                 width: bottomBarBorderWidth,
               ))),
-              child: badges.Badge(
-                badgeContent: Text(
-                  userCartLen.toString(),
-                  style: const TextStyle(color: Colors.white),
-                ),
-                badgeStyle: const badges.BadgeStyle(badgeColor: Colors.brown),
-                child: const Icon(Icons.shopping_cart_outlined),
-              ),
+              // child: badges.Badge(
+              //   badgeContent: Text(
+              //     userCartLen.toString(),
+              //     style: const TextStyle(color: Colors.white),
+              //   ),
+              //   badgeStyle: const badges.BadgeStyle(badgeColor: Colors.brown),
+              child: const Icon(Icons.calendar_today_outlined),
+              // ),
             ),
             label: '',
           )

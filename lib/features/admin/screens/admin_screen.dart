@@ -128,7 +128,7 @@ class _AdminScreenState extends State<AdminScreen> {
                       : GlobalVariables.backgroundColor,
                   width: bottomBarBorderWidth,
                 ))),
-                child: const Icon(Icons.all_inbox_outlined),
+                child: const Icon(Icons.calendar_today_outlined),
               ),
               label: ''),
         ],
