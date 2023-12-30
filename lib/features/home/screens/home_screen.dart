@@ -102,30 +102,6 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 10,
             ),
             TopCategories(),
-            ElevatedButton(
-              onPressed: () {
-                // Add condition for Customer/Admin ReservationScreen
-                Navigator.push(
-                  context,
-                  // MaterialPageRoute(builder: (context) => ReservationScreen()),
-                  MaterialPageRoute(
-                      builder: (context) => AdminReservationScreen()),
-                );
-              },
-              child: Text('Place Reservation'),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => InventoryPage()),
-                );
-              },
-              child: Text('Inventory(for admin)'),
-            ),
             SizedBox(
               height: 10,
             ),

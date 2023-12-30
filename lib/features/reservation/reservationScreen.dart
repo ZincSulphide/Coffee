@@ -52,6 +52,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
   }
 
   Widget buildSlotButton(String slot) {
+    // selectedSlots.insert()
     bool isSlotSelected = selectedSlots.contains(slot);
 
     return GestureDetector(
@@ -92,6 +93,51 @@ class _ReservationScreenState extends State<ReservationScreen> {
       {'number': 3, 'capacity': '(Recommended for Up to 6 People)'},
       {'number': 4, 'capacity': '(Recommended for Up to 6 People)'},
     ];
+
+    Future<void> _showConfirmationDialog(BuildContext context) async {
+      return showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Confirm Reservation'),
+            content: Text('Do you want to confirm your reservation?'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () {
+                  // Handle the confirmation action here
+                  // You can call your API or perform any other necessary actions
+                  // Handle selected date, table, and slots
+                  print('Selected Date: $selectedDate');
+                  print('Selected Table: $selectedTable');
+                  print('Selected Slots: $selectedSlots');
+
+                  for (int i = 3; i < selectedSlots.length; i++) {
+                    reservationApi.addReservation(
+                        user.name,
+                        selectedDate!,
+                        predefinedSlots.indexOf(selectedSlots[i]),
+                        selectedTable!);
+
+                    print(user.name);
+                    print(selectedDate);
+                    print(predefinedSlots.indexOf(selectedSlots[i]));
+                    print(selectedTable);
+                  }
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: Text('Confirm'),
+              ),
+            ],
+          );
+        },
+      );
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -142,6 +188,9 @@ class _ReservationScreenState extends State<ReservationScreen> {
                   setState(() {
                     selectedTable = newValue!;
                   });
+                  selectedSlots.add('10:00 - 11:00');
+                  selectedSlots.add('11:00 - 12:00');
+                  selectedSlots.add('12:00 - 13:00');
                 },
                 items: [
                   DropdownMenuItem(
@@ -173,23 +222,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
               padding: const EdgeInsets.all(16.0),
               child: ElevatedButton(
                 onPressed: () {
-                  // Handle selected date, table, and slots
-                  print('Selected Date: $selectedDate');
-                  print('Selected Table: $selectedTable');
-                  print('Selected Slots: $selectedSlots');
-
-                  for (int i = 0; i < selectedSlots.length; i++) {
-                    reservationApi.addReservation(
-                        user.name,
-                        selectedDate!,
-                        predefinedSlots.indexOf(selectedSlots[i]),
-                        selectedTable!);
-
-                    print(user.name);
-                    print(selectedDate);
-                    print(predefinedSlots.indexOf(selectedSlots[i]));
-                    print(selectedTable);
-                  }
+                  _showConfirmationDialog(context);
                 },
                 child: Text('Confirm Selection'),
               ),

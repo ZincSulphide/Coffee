@@ -160,7 +160,7 @@ class _AddressScreenState extends State<AddressScreen> {
                     CustomTextField(
                       controller: _zipCodeController,
                       hintText: 'ZIP code',
-                      obscureText: true,
+                      obscureText: false,
                     ),
                     const SizedBox(
                       height: 10,
@@ -168,7 +168,7 @@ class _AddressScreenState extends State<AddressScreen> {
                     CustomTextField(
                       controller: _cityController,
                       hintText: 'Town/City',
-                      obscureText: true,
+                      obscureText: false,
                     ),
                     const SizedBox(
                       height: 10,

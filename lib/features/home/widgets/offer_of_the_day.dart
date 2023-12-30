@@ -61,7 +61,7 @@ class _OfferOfDayState extends State<OfferOfDay> {
                       padding: const EdgeInsets.only(left: 15),
                       alignment: Alignment.topLeft,
                       child: const Text(
-                        '\$2.99',
+                        '\$2.18',
                         style: TextStyle(
                           fontSize: 18,
                         ),
@@ -72,7 +72,7 @@ class _OfferOfDayState extends State<OfferOfDay> {
                       padding:
                           const EdgeInsets.only(left: 15, top: 5, right: 40),
                       child: const Text(
-                        'Special Latte',
+                        'Scrambled Egg on Toast',
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
